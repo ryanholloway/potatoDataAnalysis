@@ -1,1 +1,4 @@
-python-3.9.6
+Flask==2.0.1
+flask-httpauth==4.5.0
+Werkzeug==2.0.1
+gunicorn==20.1.0
