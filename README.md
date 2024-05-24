@@ -1,4 +1,4 @@
-## Potato Data Analytics App
+﻿## Potato Data Analytics App
 
 ### Overview
 

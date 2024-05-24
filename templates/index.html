@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Potato Data Logger</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Potato Data Logger</h1>
+    <form id="dataForm">
+        <label for="plant_id">Plant ID:</label>
+        <input type="text" id="plant_id" name="plant_id" required><br>
+        <label for="disease_type">Disease Type:</label>
+        <input type="text" id="disease_type" name="disease_type" required><br>
+        <label for="test_result">Test Result:</label>
+        <input type="text" id="test_result" name="test_result" required><br>
+        <label for="field_location">Field Location:</label>
+        <input type="text" id="field_location" name="field_location" required><br>
+        <label for="date_logged">Date Logged:</label>
+        <input type="date" id="date_logged" name="date_logged" required><br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        document.getElementById('dataForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const data = {
+                plant_id: document.getElementById('plant_id').value,
+                disease_type: document.getElementById('disease_type').value,
+                test_result: document.getElementById('test_result').value,
+                field_location: document.getElementById('field_location').value,
+                date_logged: document.getElementById('date_logged').value
+            };
+
+            fetch('/add_entry', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            }).then(response => response.json())
+              .then(data => {
+                  if (data.status === 'success') {
+                      alert('Entry added successfully!');
+                  }
+              });
+        });
+    </script>
+</body>
+</html>
